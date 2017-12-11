@@ -9,6 +9,6 @@ namespace DBLab2
     public class Score
     {
         public virtual IList<Level> Levels { get; set; }
-        public virtual Player;
+        public virtual Player Player { get; set; }
     }
 }

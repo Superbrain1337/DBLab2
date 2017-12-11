@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity.Infrastructure;
 
 namespace DBLab2
 {
@@ -24,19 +27,19 @@ namespace DBLab2
     {
         public const string SqlConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DBLab2Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public string SqlQuery { get; set; }
-        public SqlCommand command;
         public SqlDataReader Reader;
-        public SqlConnection MainConnection = new SqlConnection(SqlConnectionString);
         public List<string> SelectedObjects = new List<string>();
 
         public MainWindow()
         {
+            ListGenerator Lg = new ListGenerator(SqlConnectionString);
             InitializeComponent();
         }
 
         public void ExcecuteCommand(string sqlQuery, bool isSelectQuery)
         {
-            command = new SqlCommand(sqlQuery, MainConnection);
+            SqlConnection MainConnection = new SqlConnection(SqlConnectionString);
+            SqlCommand command = new SqlCommand(sqlQuery, MainConnection);
             try
             {
                 MainConnection.Open();
@@ -73,5 +76,12 @@ namespace DBLab2
         DbSet<Player> Players { get; set; }
         DbSet<Level> Levels { get; set; }
         DbSet<Score> Scores { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            var playerEntityConfig = modelBuilder.Entity<Player>().HasKey(p => p.PlayerId);
+            var levelEntityConfig = modelBuilder.Entity<Level>().HasKey(l => l.LevelId);
+            var scoreEntityConfig = modelBuilder.Entity<Score>().HasRequired(s => s.Levels);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace DBLab2
     {
         public int PlayerId { get; set; }
         public string Name { get; set; }
+        public IList<Level> LevelScore { get; set; }
     }
 }
