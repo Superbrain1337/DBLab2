@@ -23,6 +23,7 @@ namespace DBLab2
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
         public const string SqlConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DBLab2Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
@@ -32,7 +33,6 @@ namespace DBLab2
 
         public MainWindow()
         {
-            ListGenerator Lg = new ListGenerator(SqlConnectionString);
             InitializeComponent();
         }
 
@@ -68,20 +68,28 @@ namespace DBLab2
                 MainConnection.Close();
             }
         }
+
+        public void AddStuff(ListGenerator Lg)
+        {
+            Lg.SaveChanges();
+        }
     }
+
 
     public class ListGenerator : DbContext
     {
-        public ListGenerator(string cs) : base (cs) { }
-        DbSet<Player> Players { get; set; }
-        DbSet<Level> Levels { get; set; }
-        DbSet<Score> Scores { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        private const string SqlConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DBLab2Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public ListGenerator() : base (SqlConnectionString) { }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Level> Levels { get; set; }
+        public DbSet<Score> Scores { get; set; }
+        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var playerEntityConfig = modelBuilder.Entity<Player>().HasKey(p => p.PlayerId);
             var levelEntityConfig = modelBuilder.Entity<Level>().HasKey(l => l.LevelId);
-            var scoreEntityConfig = modelBuilder.Entity<Score>().HasRequired(s => s.Levels);
+            var scoreEntityConfig = modelBuilder.Entity<Score>().HasRequired(s => s.Player).WithMany(p => p.LevelScore);
+            var scoreEntityConfig
             base.OnModelCreating(modelBuilder);
-        }
+        }*/
     }
 }
