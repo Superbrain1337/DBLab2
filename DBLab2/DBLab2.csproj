@@ -61,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\201712122015356_Adding_Values_2.cs" />
+    <Compile Include="Migrations\201712122015356_Adding_Values_2.Designer.cs">
+      <DependentUpon>201712122015356_Adding_Values_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Score.cs" />
     <Page Include="MainWindow.xaml">
@@ -92,6 +96,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201712122015356_Adding_Values_2.resx">
+      <DependentUpon>201712122015356_Adding_Values_2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

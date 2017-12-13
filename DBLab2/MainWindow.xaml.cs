@@ -34,6 +34,8 @@ namespace DBLab2
         public MainWindow()
         {
             InitializeComponent();
+            ListGenerator Lg = new ListGenerator();
+            AddStuff(Lg);
         }
 
         public void ExcecuteCommand(string sqlQuery, bool isSelectQuery)
@@ -71,6 +73,20 @@ namespace DBLab2
 
         public void AddStuff(ListGenerator Lg)
         {
+            Level L = new Level();
+            Score S = new Score();
+            Player P = new Player();
+            L.LevelId = 1;
+            L.NumbOfBirds = 5;
+            L.Score = S;
+            P.Name = "Samuel";
+            P.PlayerId = 1;
+            P.Score = S;
+            S.Player = new List<Player> { P };
+            S.Level = new List<Level> { L };
+            Lg.Levels.Add(L);
+            Lg.Players.Add(P);
+            Lg.Scores.Add(S);
             Lg.SaveChanges();
         }
     }
@@ -92,4 +108,49 @@ namespace DBLab2
             base.OnModelCreating(modelBuilder);
         }*/
     }
+    /*
+    public override void Up()
+    {
+        CreateTable(
+            "dbo.Levels",
+            c => new
+            {
+                LevelId = c.Int(nullable: false),
+                NumbOfBirds = c.Int(nullable: false),
+            })
+            .PrimaryKey(t => t.LevelId)
+            .ForeignKey("dbo.Scores", t => t.LevelId)
+            .Index(t => t.LevelId);
+
+        CreateTable(
+            "dbo.Scores",
+            c => new
+            {
+                ScoreId = c.Int(nullable: false, identity: true),
+            })
+            .PrimaryKey(t => t.ScoreId);
+
+        CreateTable(
+            "dbo.Players",
+            c => new
+            {
+                PlayerId = c.Int(nullable: false),
+                Name = c.String(nullable: false),
+            })
+            .PrimaryKey(t => t.PlayerId)
+            .ForeignKey("dbo.Scores", t => t.PlayerId)
+            .Index(t => t.PlayerId);
+
+    }
+
+    public override void Down()
+    {
+        DropForeignKey("dbo.Levels", "LevelId", "dbo.Scores");
+        DropForeignKey("dbo.Players", "PlayerId", "dbo.Scores");
+        DropIndex("dbo.Players", new[] { "PlayerId" });
+        DropIndex("dbo.Levels", new[] { "LevelId" });
+        DropTable("dbo.Players");
+        DropTable("dbo.Scores");
+        DropTable("dbo.Levels");
+    }*/
 }
