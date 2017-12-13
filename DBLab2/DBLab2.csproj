@@ -61,9 +61,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201712122015356_Adding_Values_2.cs" />
-    <Compile Include="Migrations\201712122015356_Adding_Values_2.Designer.cs">
-      <DependentUpon>201712122015356_Adding_Values_2.cs</DependentUpon>
+    <Compile Include="Migrations\201712132132280_nr8.cs" />
+    <Compile Include="Migrations\201712132132280_nr8.Designer.cs">
+      <DependentUpon>201712132132280_nr8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712132137297_base_values.cs" />
+    <Compile Include="Migrations\201712132137297_base_values.Designer.cs">
+      <DependentUpon>201712132137297_base_values.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Score.cs" />
@@ -96,8 +100,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201712122015356_Adding_Values_2.resx">
-      <DependentUpon>201712122015356_Adding_Values_2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712132132280_nr8.resx">
+      <DependentUpon>201712132132280_nr8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712132137297_base_values.resx">
+      <DependentUpon>201712132137297_base_values.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

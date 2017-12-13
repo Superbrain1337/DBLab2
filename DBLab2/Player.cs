@@ -10,14 +10,14 @@ namespace DBLab2
 {
     public class Player
     {
-        [Required]
         [Key]
         public int PlayerId { get; set; }
 
         [Required]
+        [Column("Name", TypeName = "nvarchar")]
+        [StringLength(32)]
         public string Name { get; set; }
-
-        public Score Score { get; set; }
-        //public IList<Score> LevelScore { get; set; }
+        
+        public virtual IList<Score> PlayerScore { get; set; }
     }
 }

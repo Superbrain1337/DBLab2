@@ -7,13 +7,13 @@ namespace DBLab2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Adding_Values_2 : IMigrationMetadata
+    public sealed partial class base_values : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Adding_Values_2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(base_values));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712122015356_Adding_Values_2"; }
+            get { return "201712132137297_base_values"; }
         }
         
         string IMigrationMetadata.Source

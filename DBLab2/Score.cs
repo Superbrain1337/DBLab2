@@ -10,16 +10,16 @@ namespace DBLab2
 {
     public class Score
     {
-        [Required]
-        [ForeignKey("LevelId")]
-        public virtual IList<Level> Level { get; set; }
-        
-        [Required]
-        [ForeignKey("PlayerId")]
-        public virtual IList<Player> Player { get; set; }
-
         [Key]
         public int ScoreId { get; set; }
+
+        [Required]
+        [Column("Moves", TypeName = "int")]
+        public int Moves { get; set; }
+
+        [Required]
+        public virtual Level Level { get; set; }
+        
         
     }
 }

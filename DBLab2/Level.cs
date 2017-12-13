@@ -10,14 +10,13 @@ namespace DBLab2
 {
     public class Level
     {
-        [Required]
         [Key]
         public int LevelId { get; set; }
-
+        
         [Required]
+        [Column("NumbOfBirds", TypeName = "int")]
         public int NumbOfBirds { get; set; }
         
-        public Score Score { get; set; }
-        //public IList<Score> PlayerScore { get; set; }
+        public virtual IList<Player> Players { get; set; }
     }
 }

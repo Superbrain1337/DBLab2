@@ -35,7 +35,7 @@ namespace DBLab2
         {
             InitializeComponent();
             ListGenerator Lg = new ListGenerator();
-            AddStuff(Lg);
+            //AddStuff(Lg);
         }
 
         public void ExcecuteCommand(string sqlQuery, bool isSelectQuery)
@@ -71,7 +71,7 @@ namespace DBLab2
             }
         }
 
-        public void AddStuff(ListGenerator Lg)
+        /*public void AddStuff(ListGenerator Lg)
         {
             Level L = new Level();
             Score S = new Score();
@@ -88,7 +88,7 @@ namespace DBLab2
             Lg.Players.Add(P);
             Lg.Scores.Add(S);
             Lg.SaveChanges();
-        }
+        }*/
     }
 
 
