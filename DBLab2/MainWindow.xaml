@@ -18,28 +18,26 @@
             <ColumnDefinition Width="150*"/>
             <ColumnDefinition Width="62*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="DataGrid_Players" Margin="10,26,9.8,77.6" Grid.ColumnSpan="2"/>
+        <DataGrid x:Name="DataGrid_Players" Margin="10,26,9.8,77.6" Grid.ColumnSpan="2" IsSynchronizedWithCurrentItem="True" SelectionChanged="DataGrid_Players_SelectionChanged"/>
         <DataGrid x:Name="DataGrid_Levels" Margin="1.2,26,6.4,77.6" Grid.Column="2"/>
-        <DataGrid x:Name="DataGrid_Scores" Margin="0.2,26,9.2,77.6" Grid.Column="3" Grid.ColumnSpan="3"/>
+        <DataGrid x:Name="DataGrid_Scores" Margin="0,26,9,112" Grid.Column="3" Grid.ColumnSpan="3"/>
         <Label x:Name="Label_AddPlayer" Content="Player Handler" HorizontalAlignment="Left" Margin="10,0,0,53.6" Width="87" Height="25" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
         <ComboBox x:Name="ComboBox_ScoresName" Grid.Column="3" Margin="0.2,0,9.8,30.6" VerticalAlignment="Bottom" Height="23"/>
-        <TextBox x:Name="TextBox_Levels" Height="23" Margin="1.2,0,6.4,30.6" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="2"/>
         <Label x:Name="Label_Players" Content="Players" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="60" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
         <Label x:Name="Label_Levels" Content="Levels" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="62" Grid.Column="2" Margin="1.2,0,0,0"/>
         <Label x:Name="Label_Scores" Content="Scores" HorizontalAlignment="Left" Margin="5.6,0,0,0" VerticalAlignment="Top" Grid.Column="3" Height="26" Width="50"/>
-        <Label x:Name="Label_AddLevels" Content="Levels Handler" HorizontalAlignment="Left" Margin="1.2,0,0,53.6" VerticalAlignment="Bottom" Height="25" Width="89" Grid.Column="2"/>
         <Label x:Name="Label_AddPlayerToScore" Content="Player name" HorizontalAlignment="Left" Margin="0.2,0,0,53.6" VerticalAlignment="Bottom" Grid.Column="3" Height="25" Width="75"/>
         <TextBox x:Name="TextBox_Player" Margin="10,0,8.8,30.6" TextWrapping="Wrap" Height="23" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
         <Label x:Name="Label_AddScoreToScores" Content="Score" HorizontalAlignment="Left" Margin="1,0,0,53.6" VerticalAlignment="Bottom" Grid.Column="5" Height="25" Width="38"/>
         <Label x:Name="Label_AddLevelToScore" Content="Level" HorizontalAlignment="Left" Margin="0.2,0,0,53.6" VerticalAlignment="Bottom" Grid.Column="4" Height="25" Width="38" RenderTransformOrigin="3.305,0.312"/>
-        <ComboBox x:Name="ComiBox_ScoreLevel" Grid.Column="4" Margin="0.2,0,9.4,30.6" VerticalAlignment="Bottom" Height="23"/>
-        <ComboBox x:Name="ComiBox_ScoreScore" Grid.Column="5" Margin="1,0,9.6,30.6" VerticalAlignment="Bottom" Height="23"/>
-        <Button x:Name="Button_RemovePlayer" Content="Remove" Margin="0,0,9.8,6.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="51" Grid.ColumnSpan="2" Height="19"/>
-        <Button x:Name="Button_RemoveLevel" Content="Remove" Margin="0,0,6.4,6.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="51" Grid.Column="2" Height="19"/>
-        <Button x:Name="Button_RemoveScore" Content="Remove" Margin="0,0,8.4,6.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="51" Grid.Column="3" Height="19"/>
-        <Button x:Name="Button_ManagePlayer" Content="Manage" Margin="0,0,65.8,6.6" HorizontalAlignment="Right" Width="52" Height="19" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
-        <Button x:Name="Button_ManageLevel" Content="Manage" Margin="0,0,63.4,6.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="52" Grid.Column="2" Height="19"/>
-        <Button x:Name="Button_ManageScore" Content="Manage" Margin="0,0,64.4,6.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="52" Grid.Column="3" Height="19"/>
+        <ComboBox x:Name="ComboBox_ScoreLevel" Grid.Column="4" Margin="0.2,0,9.4,30.6" VerticalAlignment="Bottom" Height="23" SelectionChanged="ComboBox_ScoreLevel_SelectionChanged"/>
+        <ComboBox x:Name="ComboBox_ScoreScore" Grid.Column="5" Margin="1,0,9.6,30.6" VerticalAlignment="Bottom" Height="23"/>
+        <Button x:Name="Button_ManagePlayer" Content="Add Player" Margin="0,0,9,7" HorizontalAlignment="Right" Width="109" Height="19" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Click="Button_ManagePlayer_Click"/>
+        <Button x:Name="Button_ManageLevel" Content="Add Level" Margin="0,0,10,7" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="105" Grid.Column="2" Height="19" Click="Button_ManageLevel_Click"/>
+        <Button x:Name="Button_AddScore" Content="Add Score" Margin="0,0,10,7" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="106" Grid.Column="3" Height="19" Click="Button_AddScore_Click"/>
+        <TextBox x:Name="TextBox_NumbOfBirds" Height="23" Margin="10,0,10,31" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="2"/>
+        <Label x:Name="Label_AddBirds" Content="Number of Birds" HorizontalAlignment="Left" Margin="10,0,0,54" VerticalAlignment="Bottom" Height="25" Width="111" Grid.Column="2"/>
+        <Label x:Name="Label_Error" Content="" HorizontalAlignment="Left" Margin="0,0,0,82" VerticalAlignment="Bottom" Grid.Column="3" Height="25" Width="380" Grid.ColumnSpan="3"/>
 
     </Grid>
 </Window>

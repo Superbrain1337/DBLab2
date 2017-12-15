@@ -1,0 +1,1 @@
+﻿INSERT INTO dbo.Scores(Moves, Player_PlayerId, Level_LevelId) Values (3, 1, 2)
