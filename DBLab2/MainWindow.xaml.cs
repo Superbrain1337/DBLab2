@@ -32,6 +32,7 @@ namespace DBLab2
         public string SqlQuery { get; set; }
         public SqlDataReader Reader;
         public List<string> SelectedObjects = new List<string>();
+        public bool CanUpdate = true;
 
         public MainWindow()
         {
@@ -86,10 +87,6 @@ namespace DBLab2
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable("Players");
-                sda.Fill(dt);
-                CmdString = @"SELECT Moves FROM dbo.Scores";
-                cmd = new SqlCommand(CmdString, con);
-                sda = new SqlDataAdapter(cmd);
                 sda.Fill(dt);
                 DataGrid_Players.ItemsSource = dt.DefaultView;
             }
@@ -157,27 +154,78 @@ namespace DBLab2
 
         private void Button_ManagePlayer_Click(object sender, RoutedEventArgs e)
         {
+            // Adds a new Player to the database
             if(TextBox_Player.Text != null && TextBox_Player.Text != "")
             {
                 SqlQuery = $@"INSERT INTO dbo.Players (Name) VALUES ('{TextBox_Player.Text}')";
                 ExcecuteCommand(SqlQuery, false);
             }
+            CanUpdate = false;
             FillPlayerGrid();
+            ComboBox_ScoresName.Items.Clear();
+            FillComboboxes();
         }
 
         private void Button_ManageLevel_Click(object sender, RoutedEventArgs e)
         {
+            // Adds a new Level to the database
             if(TextBox_NumbOfBirds.Text != null && TextBox_NumbOfBirds.Text != "")
             {
                 SqlQuery = $@"INSERT INTO dbo.Levels (NumbOfBirds) VALUES ('{TextBox_NumbOfBirds.Text}')";
                 ExcecuteCommand(SqlQuery, false);
             }
             FillLevelGrid();
+            ComboBox_ScoreLevel.Items.Clear();
+            FillComboboxes();
         }
 
         private void DataGrid_Players_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Displays the info of the selected object
+            if(DataGrid_Players.SelectedCells.Count > 0 && CanUpdate)
+            {
+                Label_Info.Content = "";
+                var cellInfo = DataGrid_Players.SelectedCells[0];
+                var content = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text;
 
+                SqlQuery = $@"SELECT Moves FROM dbo.Scores WHERE Player_PlayerId = {content}";
+                ExcecuteCommand(SqlQuery, true);
+                int sum = 0;
+                List<int> MovesList = new List<int>();
+                for(int i = 0; i < SelectedObjects.Count; i++)
+                {
+                    sum += int.Parse(SelectedObjects.ElementAt(i));
+                    MovesList.Add(int.Parse(SelectedObjects.ElementAt(i)));
+                }
+
+                SqlQuery = $@"SELECT Level_LevelId FROM dbo.Scores WHERE Player_PlayerId = {content}";
+                ExcecuteCommand(SqlQuery, true);
+                List<int> LevelIdList = new List<int>();
+                for(int i = 0; i < SelectedObjects.Count; i++)
+                {
+                    LevelIdList.Add(int.Parse(SelectedObjects.ElementAt(i)));
+                }
+
+                List<int> MovesLeftList = new List<int>();
+                for(int i = 0; i < LevelIdList.Count; i++)
+                {
+                    SqlQuery = $@"SELECT NumbOfBirds FROM dbo.Levels WHERE LevelId = {LevelIdList.ElementAt(i)}";
+                    ExcecuteCommand(SqlQuery, true);
+                    int difference = int.Parse(SelectedObjects.First()) - MovesList.ElementAt(i);
+                    MovesLeftList.Add(difference);
+                }
+
+                string oldContent = Label_Info.Content.ToString();
+                string newContent = "";
+                for(int i = 0; i < MovesList.Count; i++)
+                {
+                    newContent = $"Level {LevelIdList.ElementAt(i)}, {MovesList.ElementAt(i)} moves ({MovesLeftList.ElementAt(i)} left) \n";
+                    Label_Info.Content = oldContent + newContent;
+                    oldContent = Label_Info.Content.ToString();
+                }
+                Label_Info.Content = $"{oldContent} {sum} moves total";
+            }
+            CanUpdate = true;
         }
 
         private void ComboBox_ScoreLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
